@@ -38,7 +38,6 @@ type QuestionRequest struct {
 
 func (qr QuestionRequest) MakeRequest() (*SearchResponse, error) {
 	url := fmt.Sprintf("http://api.stackoverflow.com/1.1/questions?ids=%s&body=%v", qr.Ids, qr.Body)
-	fmt.Println(url)
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
@@ -54,7 +53,6 @@ func (qr QuestionRequest) MakeRequest() (*SearchResponse, error) {
 
 func (sr SearchRequest) MakeRequest() (*SearchResponse, error) {
 	url := fmt.Sprintf("http://api.stackoverflow.com/1.1/search?tagged=%s&page=%d&pagesize=%d", sr.Tagged, sr.Page, sr.PageSize)
-	//fmt.Println(url)
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
@@ -103,7 +101,7 @@ func main() {
 			if err != nil {
 				fmt.Println(err)
 			}
-			fmt.Sprintf("{question_id:%d, tags:%s, body_length: %d}\n", q.QuestionId, string(buf), len(q.Body))
+			fmt.Printf("{question_id:%d, tags:%s, body_length: %d}\n", q.QuestionId, string(buf), len(q.Body))
 		}
 		sr.Page++
 	}
