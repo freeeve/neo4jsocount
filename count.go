@@ -15,19 +15,19 @@ type SearchRequest struct {
 }
 
 type SearchResponse struct {
-	Total     int        `json="total"`
-	Page      int        `json="page"`
-	PageSize  int        `json="pagesize"`
-	Questions []Question `json="questions"`
+	Total     int        `json:"total"`
+	Page      int        `json:"page"`
+	PageSize  int        `json:"pagesize"`
+	Questions []Question `json:"questions"`
 }
 
 type Question struct {
-	Tags         []string `json="tags"`
-	AnswerCount  int      `json="answer_count"`
-	QuestionId   int      `json="question_id"`
-	CreationDate int      `json="creation_date"`
-	Title        string   `json="title"`
-	Body         string   `json="body"`
+	Tags         []string `json:"tags"`
+	AnswerCount  int      `json:"answer_count"`
+	QuestionId   int      `json:"question_id"`
+	CreationDate int      `json:"creation_date"`
+	Title        string   `json:"title"`
+	Body         string   `json:"body"`
 }
 
 // http://api.stackoverflow.com/1.1/questions/22323946?body=true
@@ -37,7 +37,7 @@ type QuestionRequest struct {
 }
 
 func (qr QuestionRequest) MakeRequest() (*SearchResponse, error) {
-	url := fmt.Sprintf("http://api.stackoverflow.com/1.1/questions?ids=%s&body=%v", qr.Ids, qr.Body)
+	url := fmt.Sprintf("http://api.stackoverflow.com/1.1/questions/%s?body=%v", qr.Ids, qr.Body)
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
